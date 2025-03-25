@@ -10,12 +10,19 @@ echo 'Your name was stored in $name'
 
 # exercise: write a script that asks the user for a 
 # filename and create an empty file named after it
+
 # Ask the user for a filename
-echo "Enter a filename:"
-read filename
+read -p "Enter a filename: " filename
+
+# If no filename is given, create a default one with a timestamp
+if [[ -z "$filename" ]]; then
+    filename="newfile_$(date +%Y%m%d_%H%M%S).txt"
+    echo "No filename provided. Using default: $filename"
+fi
 
 # Create an empty file with the given name
 touch "$filename"
 
 # Confirm creation
 echo "File '$filename' has been created."
+
